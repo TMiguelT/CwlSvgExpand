@@ -1,0 +1,21 @@
+{
+  "name": "cwl-svg-expand",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd demo && webpack",
+    "watch": "cd demo && webpack --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cwl-svg": "^2.0.1",
+    "cwlts": "^1.15.18"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.4.1",
+    "typescript": "^2.6.2",
+    "webpack": "^3.10.0"
+  }
+}

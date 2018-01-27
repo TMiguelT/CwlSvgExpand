@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "es2017"
+    ],
+    "suppressImplicitAnyIndexErrors": true,
+    "skipLibCheck": true,
+    "downlevelIteration": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
