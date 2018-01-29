@@ -6,7 +6,8 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": [
-      "es2017"
+      "es2017",
+      "DOM"
     ],
     "suppressImplicitAnyIndexErrors": true,
     "skipLibCheck": true,
