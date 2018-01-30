@@ -7,7 +7,7 @@
   "scripts": {
     "build": "cd demo && webpack",
     "watch": "cd demo && webpack --watch",
-    "prepare": "rm -rf compiled && npx tsc"
+    "install": "rm -rf compiled && npx tsc"
   },
   "author": "",
   "license": "ISC",
