@@ -2,8 +2,8 @@
   "name": "cwl-svg-expand",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.js",
+  "main": "compiled/index.js",
+  "typings": "compiled/index.d.js",
   "scripts": {
     "build": "cd demo && webpack",
     "watch": "cd demo && webpack --watch",
