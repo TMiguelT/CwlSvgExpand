@@ -2,10 +2,12 @@
   "name": "cwl-svg-expand",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.js",
   "scripts": {
     "build": "cd demo && webpack",
-    "watch": "cd demo && webpack --watch"
+    "watch": "cd demo && webpack --watch",
+    "prepublish": "rm -rf compiled && npx tsc"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +23,7 @@
     "babel-preset-env": "^1.6.1",
     "css-loader": "^0.28.9",
     "node-sass": "^4.7.2",
+    "npx": "^9.7.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.20.1",
     "typescript": "^2.6.2",
