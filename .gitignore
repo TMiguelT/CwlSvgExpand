@@ -1,5 +1,6 @@
 .idea
 demo/*.bundle*
+compiled/
 
 # Logs
 logs

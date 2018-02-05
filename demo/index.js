@@ -4,7 +4,7 @@ import {WorkflowFactory} from "cwlts/models";
 import {Workflow, SVGArrangePlugin, ZoomPlugin, SVGNodeMovePlugin} from "cwl-svg";
 import sample from "cwl-svg/cwl-samples/bcbio";
 
-import ExpansionPlugin from 'expand';
+import ExpansionPlugin from 'cwl-svg-expand';
 
 const wf = WorkflowFactory.from(sample);
 const svgRoot = document.getElementById("svg");

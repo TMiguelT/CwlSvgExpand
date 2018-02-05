@@ -1,13 +1,13 @@
 {
   "name": "cwl-svg-expand",
   "version": "1.0.0",
-  "description": "",
-  "main": "compiled/index.js",
-  "typings": "compiled/index.d.js",
+  "description": "A plugin for expanding and collapsing sub-workflows in cwl-svg",
+  "main": "compiled/cwl-svg-expand.js",
+  "typings": "compiled/cwl-svg-expand.d.js",
   "scripts": {
     "build": "cd demo && webpack",
     "watch": "cd demo && webpack --watch",
-    "install": "rm -rf compiled && npx tsc"
+    "prepare": "rm -rf compiled && npx tsc"
   },
   "author": "",
   "license": "ISC",
