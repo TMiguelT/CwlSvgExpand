@@ -1,23 +1,15 @@
 import {PluginBase, Workflow} from "cwl-svg";
 import {WorkflowModel} from "cwlts/models";
 // import {Workflow as SBDraft2Workflow} from "cwlts/mappings/d2sb/Workflow";
-// import {Workflow as V1Workflow} from "cwlts/mappings/v1.0/Workflow";
+import {Workflow as V1Workflow} from "cwlts/mappings/v1.0/Workflow";
 // import {WorkflowFactory} from "cwlts/models";
 import * as objectPath from 'object-path';
-
-// type jsonWorkflow = V1Workflow | SBDraft2Workflow
+import {SVGArrangePlugin} from "cwl-svg";
 
 export default class WorkflowExpansionPlugin extends PluginBase {
-    // originalJson: jsonWorkflow;
     rootWorkflow: WorkflowModel;
     undoStack: string[] = [];
     currentLoc: string = null;
-
-    // constructor(workflow: jsonWorkflow) {
-    //     super();
-    //     this.undoStack = [];
-    //     this.originalJson = workflow;
-    // }
 
     /**
      * Collapses the current subworkflow and goes up a level in the workflow tree
@@ -53,6 +45,11 @@ export default class WorkflowExpansionPlugin extends PluginBase {
             this.workflow.draw(this.rootWorkflow);
         else
             this.workflow.draw(objectPath.withInheritedProps.get(this.rootWorkflow, this.currentLoc));
+
+        //Force rearrange if we have the SVGArrangePlugin
+        const arranger = this.workflow.plugins.find(plugin => plugin.constructor.name == 'SVGArrangePlugin');
+        if (arranger)
+            arranger.arrange();
     }
 
     afterModelChange() {
@@ -68,7 +65,7 @@ export default class WorkflowExpansionPlugin extends PluginBase {
                 const id = element.getAttribute("data-connection-id");
                 const model = this.workflow.model.findById(id).run;
 
-                if (model instanceof WorkflowModel) {
+                if ('class' in model && model.class == 'Workflow') {
                     // Work out the path to the
                     const loc = model.loc.replace(/^document\./, '').replace(/\[(\d+)]/, ".$1");
                     this.expand(loc);
