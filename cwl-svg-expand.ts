@@ -1,11 +1,17 @@
 import {PluginBase, Workflow, SVGArrangePlugin} from "cwl-svg";
 import {WorkflowModel} from "cwlts/models";
 import * as objectPath from 'object-path';
+import * as autoBind from 'auto-bind';
 
 export default class WorkflowExpansionPlugin extends PluginBase {
     rootWorkflow: WorkflowModel;
     undoStack: string[] = [];
     currentLoc: string = null;
+
+    constructor(){
+        super();
+        autoBind(this);
+    }
 
     /**
      * Collapses the current subworkflow and goes up a level in the workflow tree
@@ -53,25 +59,33 @@ export default class WorkflowExpansionPlugin extends PluginBase {
             this.rootWorkflow = this.workflow.model;
     }
 
-    afterRender() {
-        window.addEventListener("dblclick", event => {
-            const element = this.workflow.findParent(event.target as SVGElement, "node");
+    expandEvent(event){
+        const element = this.workflow.findParent(event.target as SVGElement, "node");
 
-            if (element) {
-                const id = element.getAttribute("data-connection-id");
-                const model = this.workflow.model.findById(id).run;
+        if (element) {
+            const id = element.getAttribute("data-connection-id");
+            const model = this.workflow.model.findById(id).run;
 
-                if ('class' in model && model.class == 'Workflow') {
-                    // Work out the path to the
-                    const loc = model.loc.replace(/^document\./, '').replace(/\[(\d+)]/, ".$1");
-                    this.expand(loc);
-                }
+            if ('class' in model && model.class == 'Workflow') {
+                // Work out the path to the
+                const loc = model.loc.replace(/^document\./, '').replace(/\[(\d+)]/, ".$1");
+                this.expand(loc);
             }
-        }, true);
+        }
+    }
 
-        window.addEventListener("keydown", event => {
-            if (event.key == "Backspace")
-                this.collapse();
-        });
+    collapseEvent(event){
+        if (event.key == "Backspace")
+            this.collapse();
+    }
+
+    afterRender() {
+        window.addEventListener("dblclick", this.expandEvent);
+        window.addEventListener("keydown", this.collapseEvent);
+    }
+
+    destroy(){
+        window.removeEventListener("dblclick", this.expandEvent);
+        window.removeEventListener("keydown", this.collapseEvent);
     }
 }
