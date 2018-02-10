@@ -1,6 +1,6 @@
 {
   "name": "cwl-svg-expand",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A plugin for expanding and collapsing sub-workflows in cwl-svg",
   "main": "compiled/cwl-svg-expand.js",
   "typings": "compiled/cwl-svg-expand.d.js",
