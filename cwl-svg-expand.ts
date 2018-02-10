@@ -1,10 +1,6 @@
-import {PluginBase, Workflow} from "cwl-svg";
+import {PluginBase, Workflow, SVGArrangePlugin} from "cwl-svg";
 import {WorkflowModel} from "cwlts/models";
-// import {Workflow as SBDraft2Workflow} from "cwlts/mappings/d2sb/Workflow";
-import {Workflow as V1Workflow} from "cwlts/mappings/v1.0/Workflow";
-// import {WorkflowFactory} from "cwlts/models";
 import * as objectPath from 'object-path';
-import {SVGArrangePlugin} from "cwl-svg";
 
 export default class WorkflowExpansionPlugin extends PluginBase {
     rootWorkflow: WorkflowModel;
@@ -47,7 +43,7 @@ export default class WorkflowExpansionPlugin extends PluginBase {
             this.workflow.draw(objectPath.withInheritedProps.get(this.rootWorkflow, this.currentLoc));
 
         //Force rearrange if we have the SVGArrangePlugin
-        const arranger = this.workflow.plugins.find(plugin => plugin.constructor.name == 'SVGArrangePlugin');
+        const arranger = this.workflow.getPlugin(SVGArrangePlugin);
         if (arranger)
             arranger.arrange();
     }
